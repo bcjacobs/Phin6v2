@@ -16,7 +16,7 @@ class Phin6  { // usually named the same as the header but it's not necessary
     void begin(int baudRate=9600);
     int readPin(int pin, int pedalType);
     String type(); 
-    void toMidi(int controllerNumber, int channel);
+    void toMidi(int controllerNumber, int channel, int buttonStateContact);
 
   private: // to be used in the cpp but cannot be called in the main sketch. Also declare variables here (like count).
     bool _msg; // starting with an underscore is just a conventions for all private variables

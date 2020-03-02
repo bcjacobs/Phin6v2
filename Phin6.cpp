@@ -23,19 +23,13 @@ void Phin6::begin(int baudRate) { // Serial.begin needs to be in its own method
 }
 
 // Pretend this is one or more complex and involved functions you have written
-int Phin6::readPin(int pin, int pedalType) { // TestLib:: says this function is part of the TestLib class
+int Phin6::readPin(int pin, int pedalType, int buttonStateContact) { // TestLib:: says this function is part of the TestLib class
 
   _typeValueHold = digitalRead(pedalType);
-//  _contactState = digitalRead(buttonStateContact);
+  _contactState = digitalRead(buttonStateContact);
   _n0 = analogRead(pin);
   _counter = ++_counter;
-
-    Serial.print(" - ");
-    Serial.println(_n0);
-
-
-
-  
+ 
 //    _typeValue = _typeValueHold;
 
   if (_counter < switch_wait_time) {
@@ -66,7 +60,7 @@ int Phin6::readPin(int pin, int pedalType) { // TestLib:: says this function is 
   
     // Expression
 
-    if (_typeValue == 1) {
+    if (_typeValue == 1 && _contactState == 1) {
       _type = "Expression";
       if ((_previous_n0 - 5) < _n0 || (_previous_n0 + 5) > _n0) { // filters out some jitter
       _scaled_n0 = map(_n0, 0, 1012, 0, 127); //Feb 18, 2019 changed high number from 1014 to 1012
@@ -76,7 +70,7 @@ int Phin6::readPin(int pin, int pedalType) { // TestLib:: says this function is 
 
     // Pedal
 
-    if (_typeValue == 0) {
+    if (_typeValue == 0 && _contactState == 1) {
       _type = "Pedal";
       if (_n0 < 120) {
         _scaled_n0 = 127;     
@@ -90,10 +84,10 @@ int Phin6::readPin(int pin, int pedalType) { // TestLib:: says this function is 
 
     // Contact
 
-//    if ((_typeValue == 0 || _typeValue == 1 ) && _contactState == 0) {
-//      _type = "Contact";
-//      _scaled_n0 = map(_n0, 0, 1014, 0, 127);
-//    }
+    if ((_typeValue == 0 || _typeValue == 1 ) && _contactState == 0) {
+      _type = "Contact";
+      _scaled_n0 = map(_n0, 0, 1014, 0, 127);
+    }
 
 
 
