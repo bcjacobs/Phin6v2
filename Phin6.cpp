@@ -29,7 +29,7 @@ int Phin6::readPin(int pin, int pedalType, int buttonStateContact) { // TestLib:
   _contactState = digitalRead(buttonStateContact);
   _n0 = analogRead(pin);
   _counter = ++_counter;
- 
+
 //    _typeValue = _typeValueHold;
 
   if (_counter < switch_wait_time) {

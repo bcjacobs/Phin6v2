@@ -14,9 +14,9 @@ class Phin6  { // usually named the same as the header but it's not necessary
     const int switch_wait_time = 50;
     // Methods - the main code that runs. all methods need to be defined here
     void begin(int baudRate=9600);
-    int readPin(int pin, int pedalType);
+    int readPin(int pin, int pedalType, int buttonStateContact);
     String type(); 
-    void toMidi(int controllerNumber, int channel, int buttonStateContact);
+    void toMidi(int controllerNumber, int channel);
 
   private: // to be used in the cpp but cannot be called in the main sketch. Also declare variables here (like count).
     bool _msg; // starting with an underscore is just a conventions for all private variables

@@ -1,5 +1,4 @@
 //Phin6v2 code for the Phin6 controller box
-// Tools > USB Type > Serial + MIDI
 
 #include "Phin6.h"
 
@@ -10,8 +9,8 @@ Phin6 in4;
 Phin6 in5;
 Phin6 in6;
 
-const int in1_pin = A0;
-const int in2_pin = A1;
+const int in1_pin = A1;
+const int in2_pin = A2;
 const int in3_pin = A3;
 const int in4_pin = A4;
 const int in5_pin = A5;
@@ -72,7 +71,7 @@ void loop() {
 //  Serial.println(n1); // what the? if this is not here it's all messed up for a pedal. why?
   in1.toMidi(controllerA1, channel); // must select USB type MIDI on Teensy
 
-  int n2 = in2.readPin(in2_pin, pedal_or_expression2);
+  int n2 = in2.readPin(in2_pin, pedal_or_expression2, contact2);
 //  Serial.print("Input 2 : ");
 //  Serial.println(n2);
   in2.toMidi(controllerA2, channel);
